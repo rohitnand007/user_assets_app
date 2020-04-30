@@ -17,7 +17,7 @@ def create_app(config_name):
     #(app_config[config_name])
     # app_config = 'development'#'testing for test environment'
     app.config.from_pyfile('config.py')
-    app.config.from_object(app_config['testing'])
+    app.config.from_object(app_config['development'])
 
     Bootstrap(app)
     db.init_app(app)
