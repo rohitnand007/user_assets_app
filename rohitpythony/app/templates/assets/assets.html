@@ -1,0 +1,64 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Assets{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Assets</h1>
+        {% if assets %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="40%"> comments </th>
+                  <th width="15%"> Managed_by</th>
+                  <th width="15%"> location</th>
+                  <th width="15%"> Edit </th>
+                  <th width="15%"> Delete </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for asset in assets %}
+                <tr>
+                  <td> {{ asset.comments }} </td>
+                  <td> {{ asset.user_assets.name }} </td>
+                  <td> {{ asset.location_assets.description }} </td>
+
+                  
+                  <td>
+                    <a href="{{ url_for('assets.edit_asset', id=asset.id) }}">
+                      <i class="fa fa-pencil"></i> Edit
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ url_for('assets.delete_asset', id=asset.id) }}">
+                      <i class="fa fa-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3> No assets have been added. </h3>
+            <hr class="intro-divider">
+        {% endif %}
+          <a href="{{ url_for('assets.add_asset') }}" class="btn btn-default btn-lg">
+            <i class="fa fa-plus"></i>
+            Add Asset
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
